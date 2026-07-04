@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "max-hermes-plugin"
+version = "2.1.0"
+description = "Max Messenger (max.ru) platform adapter plugin for Hermes Agent"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Artem Orlov" }]
+requires-python = ">=3.10"
+dependencies = [
+    "maxapi>=1.2.1",
+]
+keywords = ["hermes-agent", "max-messenger", "max-ru", "bot", "platform-adapter"]
+classifiers = [
+    "Framework :: Hermes Agent",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://github.com/temga/max-hermes-plugin"
+Repository = "https://github.com/temga/max-hermes-plugin"
+
+# ── Package layout ──────────────────────────────────────────────────────
+# Hermes Agent discovers platform plugins by scanning ``plugins/platforms/*``
+# for a ``plugin.yaml`` manifest. When this package is pip-installed, its
+# files must land at ``site-packages/plugins/platforms/max/`` so the existing
+# discovery (no code changes in Hermes core) picks them up automatically.
+#
+# We achieve this by declaring a single sub-package ``plugins.platforms.max``
+# via setuptools packages=[] + package-dir, which maps the repo root files
+# (adapter.py, __init__.py, plugin.yaml) into the correct site-packages path.
+
+[tool.setuptools]
+packages = ["plugins", "plugins.platforms", "plugins.platforms.max"]
+
+[tool.setuptools.package-dir]
+"plugins" = "."
+"plugins.platforms" = "."
+"plugins.platforms.max" = "."
+
+[tool.setuptools.package-data]
+"plugins.platforms.max" = ["plugin.yaml", "README.md"]

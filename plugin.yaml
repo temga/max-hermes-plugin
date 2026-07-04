@@ -1,0 +1,14 @@
+name: max
+kind: platform
+version: 2.1.0
+description: >
+  Max Messenger platform adapter (https://max.ru). Supports long-polling,
+  text, forwarded messages, attachments, images, files, voice messages,
+  inline keyboards for approval/clarify prompts, message editing,
+  burst-merge for rapid follow-ups, and per-platform busy_text_mode.
+requires_env:
+  - MAX_BOT_TOKEN
+optional_env:
+  - MAX_BOT_USER_ID: Bot's own user_id (to skip own messages)
+  - MAX_ALLOWED_USERS: Comma-separated allowlist of user IDs
+  - MAX_ALLOW_ALL_USERS: Set to "1" to allow all users
